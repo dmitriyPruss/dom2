@@ -1,0 +1,86 @@
+
+* {
+    box-sizing: border-box;
+    
+}
+
+:root {
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Kirang Haerang', cursive;
+}
+
+
+
+
+#btn {
+    border: 2px solid rgb(139, 17, 17);
+    color: red;
+    background-color: aliceblue;
+    width: 100px;
+    height: 50px;
+    cursor: pointer;
+}
+
+article {
+    width: 500px;
+    height: 800px;
+}
+
+#monstersList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 95%;
+    height: 600px;
+    background: linear-gradient(to right, white, grey, black, grey, white);
+}
+
+h3 {
+    font-size: 1.2rem;
+}
+
+li {
+    position: relative;
+    height: 100px;
+    width: 90%;
+}
+
+.commonLi {
+    border: 1px double red;
+    background-color: rgb(228, 184, 184);
+}
+
+.hoverLi {
+    border: 1px double rgb(85, 9, 9);
+    background-color: rgb(231, 141, 141);
+    cursor: pointer;
+}
+
+.quickStepLi {
+    background-color: black;
+    color: white;
+}
+
+.clickLi {
+    border: 1px double rgb(87, 113, 128);
+    background-color: rgb(202, 236, 238);
+    color: rgb(19, 41, 49);
+}
+
+.closeElem {
+    position: absolute;
+    top: 0px;
+    right: 5px;
+
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    line-height: 15px;
+    background: red;
+    color: white;
+    border-radius: 2px;
+}
