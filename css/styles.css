@@ -10,24 +10,37 @@
 
 body {
     font-family: 'Kirang Haerang', cursive;
+    
 }
 
+article {
+    background: linear-gradient(white, black, grey);
+    width: 700px;
+    height: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
 
-
+h2 {
+    font-size: 3rem;
+}
 
 #btn {
     border: 2px solid rgb(139, 17, 17);
     color: red;
-    background-color: aliceblue;
-    width: 100px;
+    font-size: 2rem;
+    text-align: center;
+    background-color: rgb(206, 212, 218);
+    width: 300px;
     height: 50px;
+    line-height: 50px;
     cursor: pointer;
+
 }
 
-article {
-    width: 500px;
-    height: 800px;
-}
+
 
 #monstersList {
     display: flex;
@@ -40,24 +53,34 @@ article {
 }
 
 h3 {
-    font-size: 1.2rem;
+    
+    font-size: 1.5rem;
+    color: white;
+    text-align: center;
+    text-shadow: 3px 5px 2px rgb(66, 30, 30);
 }
 
 li {
     position: relative;
-    height: 100px;
-    width: 90%;
+    height: 125px;
+    width: 95%;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 5px 20px;
+}
+
+li div > p {
+    margin: 10px;
 }
 
 .commonLi {
     border: 1px double red;
-    background-color: rgb(228, 184, 184);
+    background-color: rgb(180, 122, 122);
 }
 
 .hoverLi {
     border: 1px double rgb(85, 9, 9);
-    background-color: rgb(231, 141, 141);
-    cursor: pointer;
+    background-color: rgb(175, 82, 82);
 }
 
 .quickStepLi {
@@ -67,13 +90,13 @@ li {
 
 .clickLi {
     border: 1px double rgb(87, 113, 128);
-    background-color: rgb(202, 236, 238);
+    background-color: rgb(177, 23, 23);
     color: rgb(19, 41, 49);
 }
 
 .closeElem {
     position: absolute;
-    top: 0px;
+    top: 2px;
     right: 5px;
 
     width: 15px;
