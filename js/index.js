@@ -1,19 +1,60 @@
 "use strict";
 
-
 // 1.Сделать два инпута: в один вводить параметр(число), 
 // во втором показывать объем шара при заданном параметре. Навесить валидацию на 1-й инпут.
 
 const inputs = document.getElementById('inputs');
-const [firstInput, secondInput] = document.querySelectorAll('input');
+const [firstInput, secondInput] = inputs.querySelectorAll('input');
 
-firstInput.addEventListener('input', function(e) {
+const regPosVal = /^[1-9][0-9]{0,5}$/g;
+
+firstInput.addEventListener('input', isValidVolumeSphere);
+
+firstInput.addEventListener('focus', function(e) {
     const val = e.target.value;
-    console.log('target :>> ', val);
-    const res = (4 / 3) * Math.PI * Math.pow(val, 3); 
 
-    secondInput.value = res;
+    if ( val.match(regPosVal) ) {
+        this.classList.add('valid');
+        this.classList.remove('invalid');
+    } else {
+        this.classList.remove('valid');
+        this.classList.add('invalid');
+    };
 });
+
+firstInput.addEventListener('blur', function(e) {
+    this.className = '';
+});
+
+/**
+ * 
+ * @param {number} value 
+ * @returns {number} volume sphere
+ */
+function getVolumeSphere(value) {
+    return (4 / 3) * Math.PI * Math.pow(value, 3); 
+};
+
+/**
+ * 
+ * @param {object} e 
+ */
+function isValidVolumeSphere(e) {
+    const val = e.target.value;
+
+    if ( val.match(regPosVal) ) {
+        this.classList.add('valid');
+        this.classList.remove('invalid');
+
+        const res = getVolumeSphere(val);
+        secondInput.value = Math.floor(res);
+    } else {
+        this.classList.remove('valid');
+        this.classList.add('invalid');
+
+        secondInput.value = 'ERROR!';
+    };
+};
 
 
 // 2.Дан элемент #elem. Реализуйте 4 функции:
@@ -65,89 +106,121 @@ const infoArr = [
     },
 ];
 
+if (monstersList.querySelectorAll('li').length === 0) {
+    btn.classList.add('allMonsters');
+};
+
 btn.addEventListener('click', function(e) {
 
     if (monstersList.querySelectorAll('li').length === 0) {
 
         infoArr.forEach(elem => {
-            const li = document.createElement('li');
-            li.className = 'commonLi';
-            li.innerHTML = `
-            <div>
-                <span hidden>${elem.id}</span>
-                <h3>${elem.title}</h3>
-                <p>${elem.description}</p>
-                <div class='closeElem'>x</div>
-            </div>`;
-            monstersList.append(li);
-
-            const lastLi = monstersList.lastElementChild;
-            const closeElem = lastLi.querySelector('.closeElem');
-
-            closeElem.addEventListener('click', function(e) {
-                this.parentElement.parentElement.remove();
-            })
-        });       
+            makeLi(monstersList, elem);
+            this.classList.remove('allMonsters');
+        });
     };
 
     if (monstersList.querySelectorAll('li')) {
-
         const lis = monstersList.querySelectorAll('li');
-
-        let currentElem = null;
-        
-        lis.forEach(elem => {
-
-            elem.addEventListener('click', function(e) {
-                elem.classList.toggle('clickLi');
-                if (elem.classList.contains('hoverLi')) {
-                    elem.classList.remove('hoverLi');
-                };
-                currentElem = null;
-            });
-
-            elem.addEventListener('mouseover', function(e) {
-
-                if (currentElem) return;
-
-                let target = e.target;
-
-                if (target.tagName !== 'li') {
-                    target = target.closest('li');
-                };
-
-                currentElem = target;
-                target.classList.add('hoverLi');
-            });
-
-            elem.addEventListener('mouseout', function(e) {
-
-
-                if (elem.classList.contains('hoverLi')) {
-
-                    if (!currentElem) return;
-
-                    let relatedTarget = e.relatedTarget;
-
-                    while (relatedTarget) {
-                        if (currentElem === relatedTarget) return;
-
-                        relatedTarget = relatedTarget.parentElement;
-                    }
-
-                    currentElem.classList.add('quickStepLi');
-                    
-                    setTimeout( () => {
-                        elem.classList.remove('quickStepLi');
-                        elem.classList.remove('hoverLi');
-                    }, 100);
-
-                    currentElem = null;
-                };
-            });
-        });
+        lis.forEach(elem => handlerLiElement(elem) );
     };
 });
+
+
+
+/**
+ * 
+ * @param {object} listName HTMLULElement / HTMLOLElement
+ * @param {object} element 
+ */
+function makeLi(listName, element) {
+    
+    const li = document.createElement('li');
+    li.className = 'commonLi';
+    li.innerHTML = `
+        <span hidden>${element.id}</span>
+        <h3>${element.title}</h3>
+        <p>${element.description}</p>
+        <div class='closeElem'>x</div>
+    `;
+    listName.append(li);
+
+    const lastLi = listName.lastElementChild;
+    const closeElem = lastLi.querySelector('.closeElem');
+   
+    closeElem.addEventListener('click', function(e) {
+        if (listName.querySelectorAll('li').length === 1) {
+            btn.classList.add('allMonsters');
+        };
+
+        this.parentElement.remove();
+    });
+};
+
+
+/**
+ * 
+ * @param {object} element HTMLLIElement
+ */
+function handlerLiElement(element) {
+
+    let actualLi = null;
+
+    element.addEventListener('click', function(e) {
+        element.classList.toggle('clickLi');
+
+        if (element.classList.contains('hoverLi')) {
+            element.classList.remove('hoverLi');
+        };
+
+        actualLi = null;
+    });
+
+    element.addEventListener('mouseover', function(e) {
+
+        if (actualLi) {
+            return;
+        };
+
+        let target = e.target;
+
+        if (target.tagName !== 'li') {
+            target = target.closest('li');
+        };
+
+        actualLi = target;
+        target.classList.add('hoverLi');
+    });
+
+    element.addEventListener('mouseout', function(e) {
+
+        if (element.classList.contains('hoverLi')) {
+
+            if (!actualLi) {
+                return;
+            };
+
+            let relatedTarget = e.relatedTarget;
+
+            while (relatedTarget) {
+                if (actualLi === relatedTarget) {
+                    return;
+                };
+
+                relatedTarget = relatedTarget.parentElement;
+            };
+
+            actualLi.classList.add('quickStepLi');
+            
+            setTimeout( () => {
+                element.classList.remove('quickStepLi');
+                element.classList.remove('hoverLi');
+            }, 100);
+
+            actualLi = null;
+        };
+    });
+};
 
 
 

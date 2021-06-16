@@ -1,7 +1,5 @@
-
 * {
-    box-sizing: border-box;
-    
+    box-sizing: border-box;   
 }
 
 :root {
@@ -10,7 +8,17 @@
 
 body {
     font-family: 'Kirang Haerang', cursive;
-    
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: center;
+    min-width: 400px;
+    height: 100vh;
+}
+
+h2 {
+    font-size: 2.5rem;
+    text-align: center;
 }
 
 article {
@@ -21,15 +29,11 @@ article {
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-}
-
-h2 {
-    font-size: 3rem;
+    
 }
 
 #btn {
-    border: 2px solid rgb(139, 17, 17);
-    color: red;
+    border: 2px solid black;
     font-size: 2rem;
     text-align: center;
     background-color: rgb(206, 212, 218);
@@ -37,10 +41,14 @@ h2 {
     height: 50px;
     line-height: 50px;
     cursor: pointer;
-
+    border-radius: 25px 5px;
 }
 
-
+.allMonsters {
+    border: 2px solid rgb(139, 17, 17);
+    color: red;
+    background-color: rgb(219, 185, 185);
+}
 
 #monstersList {
     display: flex;
@@ -53,7 +61,6 @@ h2 {
 }
 
 h3 {
-    
     font-size: 1.5rem;
     color: white;
     text-align: center;
@@ -98,7 +105,6 @@ li div > p {
     position: absolute;
     top: 2px;
     right: 5px;
-
     width: 15px;
     height: 15px;
     text-align: center;
@@ -106,4 +112,14 @@ li div > p {
     background: red;
     color: white;
     border-radius: 2px;
+}
+
+.valid {
+    border: 1px solid blue;
+    background-color: rgb(125, 125, 173);
+}
+
+.invalid {
+    border: 1px solid red;
+    background-color: rgb(197, 119, 119);
 }
