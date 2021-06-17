@@ -1,35 +1,38 @@
 * {
-    box-sizing: border-box;   
+    box-sizing: border-box;  
 }
 
 :root {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 body {
-    font-family: 'Kirang Haerang', cursive;
     display: flex;
     flex-direction: column;
     justify-content: stretch;
     align-items: center;
-    min-width: 400px;
+    min-width: 500px;
     height: 100vh;
+    font-family: 'Kirang Haerang', cursive;
 }
 
 h2 {
-    font-size: 2.5rem;
+    font-size: 2.4rem;
     text-align: center;
 }
 
+#inputs {
+    margin: 10px 0;
+}
+
 article {
-    background: linear-gradient(white, black, grey);
-    width: 700px;
+    background: linear-gradient(grey,white, black, grey);
+    width: 80%;
     height: 800px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    
 }
 
 #btn {
@@ -54,7 +57,6 @@ article {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
     width: 95%;
     height: 600px;
     background: linear-gradient(to right, white, grey, black, grey, white);
@@ -68,15 +70,16 @@ h3 {
 }
 
 li {
+    margin: 10px 0;
     position: relative;
-    height: 125px;
+    height: 135px;
     width: 95%;
     cursor: pointer;
     border-radius: 5px;
     padding: 5px 20px;
 }
 
-li div > p {
+li > p {
     margin: 10px;
 }
 
@@ -109,17 +112,17 @@ li div > p {
     height: 15px;
     text-align: center;
     line-height: 15px;
-    background: red;
+    background: rgb(119, 4, 4);
     color: white;
     border-radius: 2px;
 }
 
 .valid {
     border: 1px solid blue;
-    background-color: rgb(125, 125, 173);
+    background-color: rgb(171, 171, 216);
 }
 
 .invalid {
     border: 1px solid red;
-    background-color: rgb(197, 119, 119);
+    background-color: rgb(219, 155, 155);
 }

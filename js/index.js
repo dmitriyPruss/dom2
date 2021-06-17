@@ -1,5 +1,6 @@
 "use strict";
 
+
 // 1.Сделать два инпута: в один вводить параметр(число), 
 // во втором показывать объем шара при заданном параметре. Навесить валидацию на 1-й инпут.
 
@@ -113,19 +114,17 @@ if (monstersList.querySelectorAll('li').length === 0) {
 btn.addEventListener('click', function(e) {
 
     if (monstersList.querySelectorAll('li').length === 0) {
-
         infoArr.forEach(elem => {
             makeLi(monstersList, elem);
             this.classList.remove('allMonsters');
         });
     };
 
-    if (monstersList.querySelectorAll('li')) {
+    if (monstersList.querySelectorAll('li').length > 0) {
         const lis = monstersList.querySelectorAll('li');
-        lis.forEach(elem => handlerLiElement(elem) );
+        lis.forEach( elem => handlerElement(elem, 50) );
     };
 });
-
 
 
 /**
@@ -160,25 +159,26 @@ function makeLi(listName, element) {
 
 /**
  * 
- * @param {object} element HTMLLIElement
+ * @param {object} element HTMLElement (for example - li, div, p)
+ * @param {number} delay
  */
-function handlerLiElement(element) {
+function handlerElement(element, delay) {
 
-    let actualLi = null;
+    let actualElement = null;
 
     element.addEventListener('click', function(e) {
-        element.classList.toggle('clickLi');
+        this.classList.toggle('clickLi');
 
-        if (element.classList.contains('hoverLi')) {
-            element.classList.remove('hoverLi');
+        if (this.classList.contains('hoverLi')) {
+            this.classList.remove('hoverLi');
         };
 
-        actualLi = null;
+        actualElement = null;
     });
 
     element.addEventListener('mouseover', function(e) {
 
-        if (actualLi) {
+        if (actualElement) {
             return;
         };
 
@@ -188,36 +188,36 @@ function handlerLiElement(element) {
             target = target.closest('li');
         };
 
-        actualLi = target;
+        actualElement = target;
         target.classList.add('hoverLi');
     });
 
     element.addEventListener('mouseout', function(e) {
 
-        if (element.classList.contains('hoverLi')) {
+        if (this.classList.contains('hoverLi')) {
 
-            if (!actualLi) {
+            if (!actualElement) {
                 return;
             };
 
             let relatedTarget = e.relatedTarget;
 
             while (relatedTarget) {
-                if (actualLi === relatedTarget) {
+                if (actualElement === relatedTarget) {
                     return;
                 };
 
                 relatedTarget = relatedTarget.parentElement;
             };
 
-            actualLi.classList.add('quickStepLi');
+            actualElement.classList.add('quickStepLi');
             
             setTimeout( () => {
-                element.classList.remove('quickStepLi');
-                element.classList.remove('hoverLi');
-            }, 100);
+                this.classList.remove('quickStepLi');
+                this.classList.remove('hoverLi');
+            }, delay);
 
-            actualLi = null;
+            actualElement = null;
         };
     });
 };
