@@ -11,10 +11,9 @@ const regPosVal = /^[1-9][0-9]{0,5}$/g;
 
 firstInput.addEventListener('input', isValidVolumeSphere);
 
-firstInput.addEventListener('focus', function(e) {
-    const val = e.target.value;
+firstInput.addEventListener('focus', function( {target: {value} } ) {
 
-    if ( val.match(regPosVal) ) {
+    if ( value.match(regPosVal) ) {
         this.classList.add('valid');
         this.classList.remove('invalid');
     } else {
@@ -38,16 +37,16 @@ function getVolumeSphere(value) {
 
 /**
  * 
- * @param {object} e 
+ * @param {object} object {target: {value}}
+ * @param {number} object.target
  */
-function isValidVolumeSphere(e) {
-    const val = e.target.value;
+function isValidVolumeSphere( {target: {value} } ) {
 
-    if ( val.match(regPosVal) ) {
+    if ( value.match(regPosVal) ) {
         this.classList.add('valid');
         this.classList.remove('invalid');
 
-        const res = getVolumeSphere(val);
+        const res = getVolumeSphere(value);
         secondInput.value = Math.floor(res);
     } else {
         this.classList.remove('valid');
@@ -129,7 +128,7 @@ btn.addEventListener('click', function(e) {
 
 /**
  * 
- * @param {object} listName HTMLULElement / HTMLOLElement
+ * @param {HTMLULElement | HTMLOLElement} listName
  * @param {object} element 
  */
 function makeLi(listName, element) {
@@ -159,7 +158,7 @@ function makeLi(listName, element) {
 
 /**
  * 
- * @param {object} element HTMLElement (for example - li, div, p)
+ * @param {HTMLElement} element
  * @param {number} delay
  */
 function handlerElement(element, delay) {
