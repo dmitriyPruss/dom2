@@ -38,7 +38,8 @@ function getVolumeSphere(value) {
 /**
  * 
  * @param {object} object {target: {value}}
- * @param {number} object.target
+ * @param {object} object.target
+ * @param {number} object.target.value
  */
 function isValidVolumeSphere( {target: {value} } ) {
 
